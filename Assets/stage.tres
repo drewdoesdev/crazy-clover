@@ -1,6 +1,13 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dn3038odtqo81"]
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://dn3038odtqo81"]
 
+[ext_resource type="Texture2D" uid="uid://crodriawka68s" path="res://Assets/background.png" id="1_8ga21"]
 [ext_resource type="Texture2D" uid="uid://2xawtyvj38sy" path="res://Assets/master.png" id="1_fybir"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p4ruv"]
+texture = ExtResource("1_8ga21")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tuod3"]
 texture = ExtResource("1_fybir")
@@ -83,6 +90,14 @@ texture = ExtResource("1_fybir")
 2:9/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:9/0/physics_layer_0/angular_velocity = 0.0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_17bxn"]
+texture = ExtResource("1_8ga21")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+
 [resource]
 physics_layer_0/collision_layer = 1
 sources/1 = SubResource("TileSetAtlasSource_tuod3")
+sources/0 = SubResource("TileSetAtlasSource_p4ruv")
+sources/2 = SubResource("TileSetAtlasSource_17bxn")
