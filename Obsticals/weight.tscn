@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://1qijaryg8yes"]
+
+[ext_resource type="Script" path="res://Obsticals/weight.gd" id="1_iv4aw"]
+[ext_resource type="Texture2D" uid="uid://bhy6guvgb68km" path="res://Assets/dumbell.png" id="1_squh6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yabx1"]
+size = Vector2(10, 10)
+
+[node name="weight" type="RigidBody2D" groups=["object"]]
+max_contacts_reported = 100
+contact_monitor = true
+can_sleep = false
+lock_rotation = true
+script = ExtResource("1_iv4aw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_squh6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+texture_filter = 1
+shape = SubResource("RectangleShape2D_yabx1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,13 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://flcmvymgvpp4"]
+
+[ext_resource type="FontFile" uid="uid://1vpj3nupcfp1" path="res://Assets/smallboy.ttf" id="1_nf1er"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lul31"]
+bg_color = Color(0.886275, 0.952941, 0.894118, 1)
+
+[resource]
+Label/colors/font_color = Color(0.2, 0.172549, 0.313726, 1)
+Label/font_sizes/font_size = 8
+Label/fonts/font = ExtResource("1_nf1er")
+Label/styles/normal = null
+Panel/styles/panel = SubResource("StyleBoxFlat_lul31")
