@@ -3,8 +3,8 @@
 [ext_resource type="Script" path="res://Obsticals/spawn-area.gd" id="1_6kgxw"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_dpwyh"]
-a = Vector2(75, 0)
-b = Vector2(-68, 0)
+a = Vector2(65, 0)
+b = Vector2(-60, 0)
 
 [node name="spawner" type="Area2D"]
 position = Vector2(12, 0)
@@ -15,7 +15,6 @@ process_callback = 0
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 0)
 shape = SubResource("SegmentShape2D_dpwyh")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

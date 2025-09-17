@@ -1,15 +1,36 @@
-[gd_scene load_steps=7 format=3 uid="uid://cn4xj3nh0rix"]
+[gd_scene load_steps=10 format=3 uid="uid://cn4xj3nh0rix"]
 
 [ext_resource type="TileSet" uid="uid://dn3038odtqo81" path="res://Assets/stage.tres" id="1_3v1cc"]
 [ext_resource type="PackedScene" uid="uid://dbaap153bau7b" path="res://UI/UserInterface.tscn" id="1_5jxbg"]
 [ext_resource type="PackedScene" uid="uid://ib6paju782ah" path="res://Player/player.tscn" id="1_ijfrk"]
 [ext_resource type="PackedScene" uid="uid://tkyv76spnhmo" path="res://Obsticals/spawner.tscn" id="1_phqnw"]
+[ext_resource type="Script" path="res://Obsticals/TileSwitcher.gd" id="3_qpurb"]
+[ext_resource type="Texture2D" uid="uid://orhcls3bjxnj" path="res://game-background.png" id="3_wi5i6"]
 [ext_resource type="Script" path="res://Scenes/StaticBody2D.gd" id="4_5lwu2"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_oo1c8"]
+a = Vector2(-13, 1)
+b = Vector2(148, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e0qgm"]
 size = Vector2(180, 142.5)
 
 [node name="Stage" type="Node2D"]
+
+[node name="UserInterface" parent="." instance=ExtResource("1_5jxbg")]
+
+[node name="spawner" parent="." instance=ExtResource("1_phqnw")]
+position = Vector2(76, 53)
+
+[node name="TileSwitcher" type="Area2D" parent="." groups=["layer-switcher"]]
+position = Vector2(13, 41)
+script = ExtResource("3_qpurb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TileSwitcher" groups=["layer-switcher"]]
+shape = SubResource("SegmentShape2D_oo1c8")
+
+[node name="Sprite2D" type="Sprite2D" parent="TileSwitcher"]
+texture = ExtResource("3_wi5i6")
 
 [node name="TileMap" type="TileMap" parent="."]
 texture_filter = 1
@@ -17,14 +38,8 @@ tile_set = ExtResource("1_3v1cc")
 format = 2
 layer_0/tile_data = PackedInt32Array(524288, 1, 9, 524289, 1, 9, 524290, 1, 9, 524291, 1, 9, 524292, 1, 9, 524293, 1, 9, 524294, 1, 9, 524295, 1, 9, 524296, 1, 9, 524297, 1, 9, 458761, 0, 0, 458760, 0, 0, 458759, 0, 0, 458758, 0, 0, 458757, 0, 0, 458756, 0, 0, 458755, 0, 0, 458754, 0, 0, 458753, 0, 0, 458752, 0, 0, 393216, 0, 0, 393217, 0, 0, 393218, 0, 0, 393219, 0, 0, 393220, 0, 0, 393221, 0, 0, 393222, 0, 0, 393223, 0, 0, 393224, 0, 0, 393225, 0, 0, 327689, 0, 0, 327688, 0, 0, 327687, 0, 0, 327686, 0, 0, 327685, 0, 0, 327684, 0, 0, 327683, 0, 0, 327682, 0, 0, 327681, 0, 0, 327680, 0, 0, 262144, 0, 0, 262145, 0, 0, 262146, 0, 0, 262147, 0, 0, 262148, 0, 0, 262149, 0, 0, 262150, 0, 0, 262151, 0, 0, 262152, 0, 0, 262153, 0, 0, 196617, 0, 0, 196616, 0, 0, 196615, 0, 0, 196614, 0, 0, 196613, 0, 0, 196612, 0, 0, 196611, 0, 0, 196610, 0, 0, 196609, 0, 0, 196608, 0, 0)
 
-[node name="UserInterface" parent="." instance=ExtResource("1_5jxbg")]
-
-[node name="spawner" parent="." instance=ExtResource("1_phqnw")]
-position = Vector2(76, 48)
-
 [node name="CharacterBody2D" parent="." instance=ExtResource("1_ijfrk")]
 position = Vector2(79, 89)
-collision_layer = 2
 
 [node name="Ground" type="StaticBody2D" parent="." groups=["ground"]]
 disable_mode = 2
@@ -46,3 +61,6 @@ shape = SubResource("RectangleShape2D_e0qgm")
 [node name="Left" type="CollisionShape2D" parent="Walls"]
 position = Vector2(-90, 71)
 shape = SubResource("RectangleShape2D_e0qgm")
+
+[connection signal="area_entered" from="TileSwitcher" to="TileSwitcher" method="_on_area_entered"]
+[connection signal="body_entered" from="TileSwitcher" to="TileSwitcher" method="_on_body_entered"]
