@@ -1,8 +1,10 @@
 extends CanvasLayer
 
-@onready var cloverDisplay = $GameUI/MarginContainer/Clover;
-@onready var timeDisplay = $GameUI/MarginContainer/Time;
-@onready var scoreDisplay = $GameUI/MarginContainer/Score;
+@onready var cloverDisplay = $GameUI/Clover;
+@onready var timeDisplay = $GameUI/Time;
+@onready var scoreDisplay = $GameUI/Score;
+
+var timeDispaly = 60;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -18,3 +20,6 @@ func _process(delta):
 	var scoreString = str(GameManager.score);
 	if(scoreDisplay.text != scoreString):
 		scoreDisplay.text = scoreString;
+		
+	var timeLeft = str(roundf(GameTimer.time_left));
+	timeDisplay.text = timeLeft;

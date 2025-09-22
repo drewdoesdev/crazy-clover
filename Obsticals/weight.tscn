@@ -1,23 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://1qijaryg8yes"]
+[gd_scene load_steps=6 format=3 uid="uid://1qijaryg8yes"]
 
 [ext_resource type="Script" path="res://Obsticals/weight.gd" id="1_iv4aw"]
-[ext_resource type="Texture2D" uid="uid://bhy6guvgb68km" path="res://Assets/dumbell.png" id="1_squh6"]
+[ext_resource type="Texture2D" uid="uid://bpiqt68b0rukk" path="res://Assets/pie.png" id="2_bkkry"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yabx1"]
 size = Vector2(10, 10)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4s2c"]
+atlas = ExtResource("2_bkkry")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mno7x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4s2c")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="weight" type="RigidBody2D" groups=["object"]]
+collision_mask = 2
 max_contacts_reported = 100
 contact_monitor = true
 can_sleep = false
 lock_rotation = true
 script = ExtResource("1_iv4aw")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_squh6")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 texture_filter = 1
 shape = SubResource("RectangleShape2D_yabx1")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_mno7x")
+
+[node name="FlipTimer" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="FlipTimer" to="." method="_on_flip_timer_timeout"]
